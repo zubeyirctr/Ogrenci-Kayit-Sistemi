@@ -14,9 +14,13 @@ public class Student {
 
     // Öğrenciye yeni ders ekleyen metod
     public void enrollInCourse(Course course) {
-        enrolledCourses.add(course);
+        if (enrolledCourses.contains(course)) {
+            System.out.println("UYARI: " + course.getCourseName() + " dersine zaten kayıtlısınız!");
+        } else {
+            enrolledCourses.add(course);
+            System.out.println("BAŞARILI: " + course.getCourseName() + " eklendi.");
+        }
     }
-
     // Getters
     public String getStudentName() { return studentName; }
     public String getStudentId() { return studentId; }
