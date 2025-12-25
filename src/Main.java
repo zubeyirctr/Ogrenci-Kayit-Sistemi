@@ -1,30 +1,32 @@
 public class Main {
     public static void main(String[] args) {
-        // 1. Dersleri tanımlayalım
         Course javaCourse = new Course("Java 101", "CS101", 5);
         Course dbCourse = new Course("Veritabanı Yönetimi", "CS202", 4);
 
-        // 2. Öğrenciyi tanımlayalım
         Student zubeyir = new Student("Zübeyir Çatar", "2024001");
 
-        System.out.println("--- Kayıt Sistemi Başlatıldı ---\n");
+        System.out.println("--- 7. GÜN: NOT SİSTEMİ VE GPA HESAPLAMA ---\n");
 
-        // 3. Normal kayıt işlemleri
         zubeyir.enrollInCourse(javaCourse);
         zubeyir.enrollInCourse(dbCourse);
 
-        // 4. TEST: Aynı dersi tekrar eklemeyi deniyoruz (Bugün eklediğimiz özellik)
-        System.out.println("\n--- Test: Aynı Dersi Tekrar Ekleme ---");
-        zubeyir.enrollInCourse(javaCourse);
+        javaCourse.setGrade(85.0);
+        dbCourse.setGrade(70.0);
 
-        // 5. Sonuçları listeleme
-        System.out.println("\n--- Öğrenci Bilgileri ---");
+        System.out.println("\n--- ÖĞRENCİ DURUMU ---");
         System.out.println(zubeyir.toString());
-        System.out.println("Kayıtlı Toplam Ders Sayısı: " + zubeyir.getEnrolledCourses().size());
 
-        System.out.println("\nDers Listesi:");
+        System.out.println("\n--- DERS LİSTESİ VE NOTLAR ---");
         for (Course c : zubeyir.getEnrolledCourses()) {
-            System.out.println("- " + c.getCourseCode() + " : " + c.getCourseName());
+            System.out.println("- " + c.getCourseName() +
+                    " [" + c.getCourseCode() + "] " +
+                    "| Kredi: " + c.getCredit() +
+                    " | Not: " + c.getGrade());
         }
+
+        double gpa = zubeyir.calculateGPA();
+        System.out.println("\n------------------------------");
+        System.out.printf("GENEL NOT ORTALAMASI: %.2f\n", gpa);
+        System.out.println("------------------------------");
     }
 }
