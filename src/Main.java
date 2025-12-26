@@ -1,32 +1,31 @@
 public class Main {
     public static void main(String[] args) {
-        Course javaCourse = new Course("Java 101", "CS101", 5);
-        Course dbCourse = new Course("Veritabanı Yönetimi", "CS202", 4);
+        Course javaCourse = new Course("CS101", "Java 101", 5);
+        Course dbCourse = new Course("CS202", "Veritabanı Yönetimi", 4);
 
         Student zubeyir = new Student("Zübeyir Çatar", "2024001");
 
-        System.out.println("--- 7. GÜN: NOT SİSTEMİ VE GPA HESAPLAMA ---\n");
+        System.out.println("--- 8. GÜN: HARF NOTU VE AKADEMİK DURUM ---\n");
 
         zubeyir.enrollInCourse(javaCourse);
         zubeyir.enrollInCourse(dbCourse);
 
-        javaCourse.setGrade(85.0);
-        dbCourse.setGrade(70.0);
+        
+        javaCourse.setGrade(88.0);
+        dbCourse.setGrade(45.0);
 
-        System.out.println("\n--- ÖĞRENCİ DURUMU ---");
+        System.out.println("\n--- GÜNCEL KARNE ---");
         System.out.println(zubeyir.toString());
 
-        System.out.println("\n--- DERS LİSTESİ VE NOTLAR ---");
         for (Course c : zubeyir.getEnrolledCourses()) {
             System.out.println("- " + c.getCourseName() +
-                    " [" + c.getCourseCode() + "] " +
-                    "| Kredi: " + c.getCredit() +
-                    " | Not: " + c.getGrade());
+                    " | Not: " + c.getGrade() +
+                    " | Harf: " + c.getLetterGrade());
         }
 
-        double gpa = zubeyir.calculateGPA();
         System.out.println("\n------------------------------");
-        System.out.printf("GENEL NOT ORTALAMASI: %.2f\n", gpa);
+        System.out.printf("GENEL NOT ORTALAMASI: %.2f\n", zubeyir.calculateGPA());
+        System.out.println("AKADEMİK DURUM: " + zubeyir.getAcademicStatus());
         System.out.println("------------------------------");
     }
 }

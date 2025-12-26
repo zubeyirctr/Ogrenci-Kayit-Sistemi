@@ -33,6 +33,14 @@ public class Student {
 
         return totalPoints / totalCredits;
     }
+    public String getAcademicStatus() {
+        double gpa = calculateGPA();
+        if (gpa >= 2.0) {
+            return "BAŞARILI (Geçti)";
+        } else {
+            return "AKADEMİK YETERSİZLİK (Kaldı)";
+        }
+    }
     public String getStudentName() { return studentName; }
     public String getStudentId() { return studentId; }
     public List<Course> getEnrolledCourses() { return enrolledCourses; }
