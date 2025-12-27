@@ -1,31 +1,24 @@
 public class Main {
     public static void main(String[] args) {
-        Course javaCourse = new Course("CS101", "Java 101", 5);
-        Course dbCourse = new Course("CS202", "Veritabanı Yönetimi", 4);
+        StudentManager manager = new StudentManager();
 
-        Student zubeyir = new Student("Zübeyir Çatar", "2024001");
+        Student s1 = new Student("Zübeyir Çatar", "2024001");
+        Student s2 = new Student("Ahmet Yılmaz", "2024002");
+        Student s3 = new Student("Ayşe Demir", "2024003");
 
-        System.out.println("--- 8. GÜN: HARF NOTU VE AKADEMİK DURUM ---\n");
+        Course java = new Course("CS101", "Java 101", 5);
+        java.setGrade(90);
 
-        zubeyir.enrollInCourse(javaCourse);
-        zubeyir.enrollInCourse(dbCourse);
+        manager.addStudent(s1);
+        manager.addStudent(s2);
+        manager.addStudent(s3);
 
-        
-        javaCourse.setGrade(88.0);
-        dbCourse.setGrade(45.0);
+        s1.enrollInCourse(java);
 
-        System.out.println("\n--- GÜNCEL KARNE ---");
-        System.out.println(zubeyir.toString());
+        manager.listAllStudents();
 
-        for (Course c : zubeyir.getEnrolledCourses()) {
-            System.out.println("- " + c.getCourseName() +
-                    " | Not: " + c.getGrade() +
-                    " | Harf: " + c.getLetterGrade());
-        }
-
-        System.out.println("\n------------------------------");
-        System.out.printf("GENEL NOT ORTALAMASI: %.2f\n", zubeyir.calculateGPA());
-        System.out.println("AKADEMİK DURUM: " + zubeyir.getAcademicStatus());
-        System.out.println("------------------------------");
+        System.out.println("\n--- Arama Testi ---");
+        manager.findStudentById("2024001");
+        manager.findStudentById("9999999"); // Bulunamayacak olan
     }
 }
