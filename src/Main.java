@@ -1,24 +1,47 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         StudentManager manager = new StudentManager();
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
 
-        Student s1 = new Student("Zübeyir Çatar", "2024001");
-        Student s2 = new Student("Ahmet Yılmaz", "2024002");
-        Student s3 = new Student("Ayşe Demir", "2024003");
+        System.out.println("=== ÖĞRENCİ YÖNETİM SİSTEMİNE HOŞ GELDİNİZ ===");
 
-        Course java = new Course("CS101", "Java 101", 5);
-        java.setGrade(90);
+        while (running) {
+            System.out.println("\n1. Yeni Öğrenci Ekle");
+            System.out.println("2. Tüm Öğrencileri Listele");
+            System.out.println("3. Öğrenci Ara (ID ile)");
+            System.out.println("4. Çıkış");
+            System.out.print("Seçiminiz: ");
 
-        manager.addStudent(s1);
-        manager.addStudent(s2);
-        manager.addStudent(s3);
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Satır sonu karakterini temizlemek için
 
-        s1.enrollInCourse(java);
-
-        manager.listAllStudents();
-
-        System.out.println("\n--- Arama Testi ---");
-        manager.findStudentById("2024001");
-        manager.findStudentById("9999999"); // Bulunamayacak olan
+            switch (choice) {
+                case 1:
+                    System.out.print("Öğrenci Adı: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Öğrenci No: ");
+                    String id = scanner.nextLine();
+                    manager.addStudent(new Student(name, id));
+                    break;
+                case 2:
+                    manager.listAllStudents();
+                    break;
+                case 3:
+                    System.out.print("Aranacak ID: ");
+                    String searchId = scanner.nextLine();
+                    manager.findStudentById(searchId);
+                    break;
+                case 4:
+                    running = false;
+                    System.out.println("Sistemden çıkılıyor... İyi günler!");
+                    break;
+                default:
+                    System.out.println("Geçersiz seçim, tekrar deneyin!");
+            }
+        }
+        scanner.close();
     }
 }
