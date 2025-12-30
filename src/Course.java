@@ -2,13 +2,13 @@ public class Course {
     private String courseCode;
     private String courseName;
     private int credit;
-    private double grade; // Yeni eklenen: 0-100 arası not
+    private double grade;
 
     public Course(String courseCode, String courseName, int credit) {
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.credit = credit;
-        this.grade = 0.0; // Varsayılan not 0
+        this.grade = 0.0;
     }
     public void setGrade(double grade) {
         if (grade >= 0 && grade <= 100) {

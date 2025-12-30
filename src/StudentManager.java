@@ -1,11 +1,25 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class StudentManager {
     private List<Student> students;
 
     public StudentManager() {
         this.students = new ArrayList<>();
+    }
+    public void saveStudentsToFile() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("ogrenciler.txt"))) {
+            for (Student s : students) {
+                // Ad, ID ve GPA bilgilerini satır satır yazıyoruz
+                writer.println(s.getStudentName() + "," + s.getStudentId() + "," + s.calculateGPA());
+            }
+            System.out.println("SİSTEM: Tüm veriler 'ogrenciler.txt' dosyasına başarıyla yedeklendi!");
+        } catch (IOException e) {
+            System.out.println("HATA: Dosyaya yazılırken bir sorun oluştu: " + e.getMessage());
+        }
     }
 
     public void addStudent(Student student) {

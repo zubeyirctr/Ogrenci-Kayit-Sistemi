@@ -13,10 +13,11 @@ public class Main {
             System.out.println("2. Tüm Öğrencileri Listele");
             System.out.println("3. Öğrenci Ara (ID ile)");
             System.out.println("4. Çıkış");
+            System.out.println("5. Verileri Dosyaya Yedekle");
             System.out.print("Seçiminiz: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Satır sonu karakterini temizlemek için
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -37,6 +38,9 @@ public class Main {
                 case 4:
                     running = false;
                     System.out.println("Sistemden çıkılıyor... İyi günler!");
+                    break;
+                case 5:
+                    manager.saveStudentsToFile();
                     break;
                 default:
                     System.out.println("Geçersiz seçim, tekrar deneyin!");
