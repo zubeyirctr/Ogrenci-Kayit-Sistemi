@@ -3,6 +3,7 @@ import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.*;
 
 public class StudentManager {
     private List<Student> students;
@@ -42,5 +43,24 @@ public class StudentManager {
             }
         }
         System.out.println("HATA: " + id + " numaralı öğrenci bulunamadı!");
+    }
+    public void loadStudentsFromFile() {
+        File file = new File("ogrenciler.txt");
+        if (!file.exists()) return; // Dosya yoksa hata verme, boş geç
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length >= 2) {
+                    
+                    Student s = new Student(parts[0], parts[1]);
+                    students.add(s);
+                }
+            }
+            System.out.println("SİSTEM: Eski veriler başarıyla yüklendi.");
+        } catch (IOException e) {
+            System.out.println("HATA: Dosya okunurken sorun oluştu!");
+        }
     }
 }

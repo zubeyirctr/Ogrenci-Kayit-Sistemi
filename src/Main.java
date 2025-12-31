@@ -3,6 +3,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         StudentManager manager = new StudentManager();
+
+        manager.loadStudentsFromFile();
+
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
