@@ -17,6 +17,7 @@ public class Main {
             System.out.println("3. Öğrenci Ara (ID ile)");
             System.out.println("4. Çıkış");
             System.out.println("5. Verileri Dosyaya Yedekle");
+            System.out.println("6. Öğrenciye Not Gir");
             System.out.print("Seçiminiz: ");
 
             int choice = scanner.nextInt();
@@ -44,6 +45,17 @@ public class Main {
                     break;
                 case 5:
                     manager.saveStudentsToFile();
+                    break;
+                case 6:
+                    System.out.print("Not girilecek Öğrenci ID: ");
+                    String targetId = scanner.nextLine();
+                    System.out.print("Ders Adı: ");
+                    String course = scanner.nextLine();
+                    System.out.print("Notu (0-100): ");
+                    double score = scanner.nextDouble();
+                    scanner.nextLine(); // Boşluk temizliği
+
+                    manager.addGradeToStudent(targetId, course, score);
                     break;
                 default:
                     System.out.println("Geçersiz seçim, tekrar deneyin!");

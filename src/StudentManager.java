@@ -14,7 +14,6 @@ public class StudentManager {
     public void saveStudentsToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("ogrenciler.txt"))) {
             for (Student s : students) {
-                // Ad, ID ve GPA bilgilerini satır satır yazıyoruz
                 writer.println(s.getStudentName() + "," + s.getStudentId() + "," + s.calculateGPA());
             }
             System.out.println("SİSTEM: Tüm veriler 'ogrenciler.txt' dosyasına başarıyla yedeklendi!");
@@ -22,7 +21,18 @@ public class StudentManager {
             System.out.println("HATA: Dosyaya yazılırken bir sorun oluştu: " + e.getMessage());
         }
     }
-
+    public void addGradeToStudent(String id, String courseName, double grade) {
+        for (Student s : students) {
+            if (s.getStudentId().equals(id)) {
+                Course newCourse = new Course(courseName, courseName, 3);
+                newCourse.setGrade(grade);
+                s.addCourse(newCourse);
+                System.out.println("SİSTEM: " + s.getStudentName() + " isimli öğrenciye " + courseName + " notu girildi.");
+                return;
+            }
+        }
+        System.out.println("HATA: Öğrenci bulunamadı!");
+    }
     public void addStudent(Student student) {
         students.add(student);
         System.out.println("SİSTEM: " + student.getStudentName() + " başarıyla kaydedildi.");
@@ -53,7 +63,7 @@ public class StudentManager {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length >= 2) {
-                    
+
                     Student s = new Student(parts[0], parts[1]);
                     students.add(s);
                 }
