@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.*;
 
 public class StudentManager {
@@ -11,6 +8,7 @@ public class StudentManager {
     public StudentManager() {
         this.students = new ArrayList<>();
     }
+
     public void saveStudentsToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("ogrenciler.txt"))) {
             for (Student s : students) {
@@ -21,6 +19,7 @@ public class StudentManager {
             System.out.println("HATA: Dosyaya yazılırken bir sorun oluştu: " + e.getMessage());
         }
     }
+
     public void addGradeToStudent(String id, String courseName, double grade) {
         for (Student s : students) {
             if (s.getStudentId().equals(id)) {
@@ -33,12 +32,17 @@ public class StudentManager {
         }
         System.out.println("HATA: Öğrenci bulunamadı!");
     }
+
     public void addStudent(Student student) {
         students.add(student);
         System.out.println("SİSTEM: " + student.getStudentName() + " başarıyla kaydedildi.");
     }
 
     public void listAllStudents() {
+        if (students.isEmpty()) {
+            System.out.println("BİLGİ: Sistemde henüz kayıtlı öğrenci yok.");
+            return;
+        }
         System.out.println("\n--- OKUL ÖĞRENCİ LİSTESİ ---");
         for (Student s : students) {
             System.out.println(s.toString() + " | GPA: " + String.format("%.2f", s.calculateGPA()));
@@ -56,14 +60,13 @@ public class StudentManager {
     }
     public void loadStudentsFromFile() {
         File file = new File("ogrenciler.txt");
-        if (!file.exists()) return; // Dosya yoksa hata verme, boş geç
+        if (!file.exists()) return;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length >= 2) {
-
                     Student s = new Student(parts[0], parts[1]);
                     students.add(s);
                 }

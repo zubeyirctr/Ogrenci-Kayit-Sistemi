@@ -14,7 +14,9 @@ public class Course {
         if (grade >= 0 && grade <= 100) {
             this.grade = grade;
         } else {
-            System.out.println("HATA: Not 0 ile 100 arasında olmalıdır!");
+            // Hata fırlatmak yerine varsayılan 0 yapalım ve uyaralım
+            this.grade = 0;
+            System.out.println("UYARI: Geçersiz not (0-100 arası olmalı). Not 0 olarak kaydedildi.");
         }
     }
     public String getLetterGrade() {

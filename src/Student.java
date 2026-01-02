@@ -20,6 +20,9 @@ public class Student {
             System.out.println("BAŞARILI: " + course.getCourseName() + " eklendi.");
         }
     }
+    public void addCourse(Course course) {
+        this.enrolledCourses.add(course); 
+    }
     public double calculateGPA() {
         if (enrolledCourses.isEmpty()) return 0.0;
 
