@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Student {
+public class Student implements Registrable {
     private String studentName;
     private String studentId;
     private List<Course> enrolledCourses;
@@ -21,7 +21,7 @@ public class Student {
         }
     }
     public void addCourse(Course course) {
-        this.enrolledCourses.add(course); 
+        this.enrolledCourses.add(course);
     }
     public double calculateGPA() {
         if (enrolledCourses.isEmpty()) return 0.0;
@@ -51,5 +51,9 @@ public class Student {
     @Override
     public String toString() {
         return "Öğrenci: " + studentName + " (No: " + studentId + ") - Aldığı Ders Sayısı: " + enrolledCourses.size();
+    }
+    @Override
+    public void register() {
+        System.out.println("SİSTEM: Öğrenci kaydı doğrulandı.");
     }
 }
